@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body{
+        margin: 0;    
+        background-color: #282828;
+        }
+    #wrap{
+        margin: 0 auto;
+        width: 1600px;
+    }
+    #header{
+        height: 990px;
+        background: no-repeat url(images/header_bg.png);
+        color: #FFF;
+        text-align: center;
+        overflow: auto;
+    }
+    .font1{
+        font-size: 62px;
+        margin: 200px auto 0;
+    }
+    .font2{
+        font-size:20px;
+        margin: 70px 402px 80px;
+        color: rgba(255,255,255,0.5);
+    }
+    #signUp{
+        margin: 0 auto;
+        border: solid 1px #595651;
+        width: 970px;
+        height: 250px;
+    }
+    .font3{
+        font-size: 16px;
+        margin: 60px auto auto;
+    }
+    .font4{
+        font-size: 12px;
+        color: #595651;
+        margin: 12px auto 40px;
+    }
+    .input{
+        display: inline-block;
+        width: 290px;
+        height: 50px;
+        border: solid 1px #595651;
+        background-color: transparent;
+        margin: 0 15px;
+        padding: 0 20px;
+        color: #FFF;
+    }
+    #submit{
+        margin: 0 15px;
+        width: 126px;
+        height: 50px;
+        background-color: #FFF;
+        border-radius: 2px;
+        border: solid 1px #FFF;
+    }
+    #part1{
+        height: 710px;
+        background-color: #FFF;
+        overflow: auto;
+        text-align: center;
+    }
+    .part1_font1{
+        font-size: 14px;
+        text-transform: uppercase;
+        margin: 86px auto 32px;
+    }
+    .part1_font2{
+        font-size: 42px;
+        margin: 0 auto 0;
+        width: 686px;
+    }
+#features{
+    width: 1200px;
+    overflow: auto;
+    margin: 80px auto 0;
+}
+.feature_box{
+    float: left;
+    display: grid;
+    grid-template-columns: 85px auto;
+    grid-template-rows: 46px auto;
+    width: 444px;
+    height: 166px;
+    margin: 0 78px;
+    text-align: left;
+}
+.feature_box img{
+    grid-column: 1;
+    grid-row: 1 2;
+}
+.feature_box h3{
+    grid-column: 2;
+    grid-row: 1;
+    margin-top: 2px;
+}
+.feature_box p{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    color: #797979;
+}
+#part2{
+    height: 800px;
+    box-sizing: border-box;
+    background: no-repeat url(images/part2_bg.png);
+    padding:180px 0 0 316px;
+    color: #FFF;
+}
+.part2_font1{
+    font-size: 42px;
+    margin:0;
+    width: 384px;
+}
+.part2_font2{
+    font-size: 18px;
+    width: 384px;
+    margin: 44px 0 48px;
+}
+#part2 button{
+    float: left;
+    margin-left: 30px;
+    width: 240px;
+    height: 60px;
+    border-radius: 2px;
+    border: solid 1px #6a726c;
+    background-color: transparent;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFF;
+}
+#part2 button:first-of-type{
+    background-color: #FFF;
+    border-color: #FFF;
+    color: #000;
+    margin:0;
+}
+#part3{
+    overflow: auto;
+    height: 580px;
+    background-color: #FFF;
+    border-bottom: solid 1px #e7e7e7;
+    text-align: center;
+}
+#part3 h2{
+    font-size: 42px;
+    margin: 98px auto 78px;
+}
+#products{
+    width: 1050px;
+    margin: 0 auto;
+    overflow: auto;
+}
+.products_box{
+    float: left;
+    width: 270px;
+    margin: 0 40px auto;
+}
+.products_title{
+    height: 78px;
+    width: 100%;
+}
+.products_box p{
+    margin: 0;
+    font-size: 16px;
+    color: #797979;
+}
+#part4{
+    height: 1002px;
+    overflow: auto;
+    background-color: #FFF;
+    border-bottom: solid 1px #e7e7e7;
+}
+#feature1{
+    width: 970px;
+    margin: 116px auto 80px;
+    overflow: auto;
+}
+#feature1 img{
+    float: left;
+    margin-right: 96px;
+}
+#feature1 div{
+    float: left;
+    width: 302px;
+    text-align: left;
+    margin-top: 72px;
+}
+#part4 h3{
+    font-size: 20px;
+    margin: 0;
+}
+#part4 p{
+    font-size: 16px;
+    color: #797979;
+    margin-top: 34px;
+}
+#feature2{
+    width: 970px;
+    margin: 0 auto;
+    overflow: auto;
+}
+#feature2 div{
+    float: left;
+    width: 306px;
+    text-align: left;
+    margin-top: 72px;
+}
+#feature2 img{
+    float: right;
+}
+#feature2 h3{
+    width: 330px;
+}
+#part5{
+    height: 1082px;
+    overflow: auto;
+    background-color: #FFF;
+    border-bottom: solid 1px #e7e7e7;
+    text-align: center;
+}
+#part5 h2{
+    font-size: 42px;
+    margin: 98px 0 0;
+}
+#part5 p{
+    font-size: 18px;
+    color: #797979;
+    margin: 30px auto 45px;
+    width: 700px;
+}
+#team{
+    margin: 0 auto;
+    overflow: auto;
+    width: 1000px;
+}
+.team_box{
+    float: left;
+    position: relative;
+    width: 470px;
+    height: 340px;
+    margin: 15px;
+}
+.team_box:hover .layer{
+        display: block;
+}
+.team_box img{
+    width: 100%;
+    height: 100%;
+}
+.layer{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    top: 0;
+    left: 0;
+    display: none;
+    cursor: url(images/c1.png),auto;
+}
+
+.layer h4{
+    color: #FFF;
+    font-size: 20px;
+    margin: 104px auto 0;
+
+}
+.layer h5{
+    font-size: 12px;
+    margin: 12px auto 32px;
+    color: #797979;
+    text-transform: uppercase;
+}
+.layer div{
+    margin: 0 auto;
+    width: fit-content;
+}
+#part6{
+    height: 702px;
+    background-color: #FFF;
+    overflow: auto;
+}
+#sendForm{
+    float: left;
+    width: 470px;
+    height: 560px;
+    border: solid 1px #d4d3d3;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 48px;
+    margin: 72px 130px 0 314px;
+    box-sizing: border-box;
+}
+
+#sendForm input{
+    display: block;
+    width: 370px;
+    height: 50px;
+    margin: 30px auto;
+    border: solid 1px #d4d3d3;
+    border-radius: 2px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+#sendForm textarea{
+    display: block;
+    margin: 30px auto;
+    resize: none;
+    width: 370px;
+    height: 144px;
+    padding:16px 0 0 20px;
+    border: solid 1px #d4d3d3;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-family:inherit;
+}
+
+#sendForm input[name='send']{
+    background-color: #000;
+    color: #FFF;
+}
+
+#sendForm h3{
+    font-size: 16px;
+    margin:0 auto 46px;
+}
+#contacts{
+    float: left;
+    width: 372px;
+    margin-top: 156px;
+}
+#contacts h2{
+    font-size: 42px;
+    margin: 0 0 22px;
+}
+#contacts p{
+    font-size: 16px;
+    color: #797979;
+    height: 136px;
+    margin: 0;
+}
+#contacts ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#contacts ul li{
+    height: 54px;
+}
+#contacts ul li:first-of-type{
+    height: 78px;
+}
+.icon{
+    display: inline-block;
+    width: 38px;
+}
+.list_font{
+    display: inline-block;
+    vertical-align: top;
+}
+#footer{
+    overflow: auto;
+    height: 410px;
+    background-color: #000;
+    color: #FFF;
+}
+#menu{
+    width: 1170px;
+    margin: 86px auto 0;
+    list-style: none;
+}
+#menu li{
+    float: left;
+    width: 300px;
+}
+#menu a{
+    display: block;
+    text-decoration: none;
+    height: 50px;
+    color: rgba(255,255,255,0.5);
+    font-size: 16px;
+}
+#menu h3{
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 0 0 30px;
+}
+#menu li:last-of-type{
+    width: 270px;
+    overflow: auto;
+}
+
+#menu p{
+    float: left;
+    color: rgba(255,255,255,0.5);
+    font-size: 18px;
+    margin: -6px 0 0;
+}
+#footer_icon{
+    float: left;
+    margin-top: 40px;
+    margin-left: -8px;
+}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="header">
+            <p class="font1">Hello Word</p>
+            <p class="font2">China is speeding up strategic plan, standards, traffic rules, laws and regulations on accident-incurred liabilities for its smart car industry, Economic Information Daily reported Thursday.</p>
+            <form id="signUp">
+                <p class="font3">CREATE YOUR ACCOUNT</p>
+                <p class="font4">IT IS ABSOLUTELY FREE</p>
+                <input type="text" class="input" placeholder="Create your username">
+                <input type="text" class="input" placeholder="Create your password">
+                <input type="submit" id="submit" value="SIGN UP">
+            </form>
+        </div>
+        <div id="part1">
+            <p class="part1_font1">Boatloads of Awesome</p>
+            <p class="part1_font2">Ready-made, customizable, HTML landing page sections</p>
+            <div id="features">
+                <div class="feature_box">
+                    <img class="icon" src="images/part1_icon1.png">
+                    <h3>Mobile First</h3>
+                    <p>All modulz are built mobile-first for maximum device compatibility.</p>
+                </div>
+                <div class="feature_box">
+                    <img class="icon" src="images/part1_icon2.png">
+                    <h3>Accessibility</h3>
+                    <p>Support for IE8, mobile and tablet devices, screenreaders and color blind.</p>
+                </div>
+                <div class="feature_box">
+                    <img class="icon" src="images/part1_icon3.png">
+                    <h3>Fluid Typography</h3>
+                    <p>On different screen sizes, fonts automagically scale with the viewport..</p>
+                </div>
+                <div class="feature_box">
+                    <img class="icon" src="images/part1_icon4.png">
+                    <h3>Customization</h3>
+                    <p>Make any design your own using the Style Editor. Personalize fonts, colors, and layouts to create the custom look you want.</p>
+                </div>
+            </div>
+        </div>
+        <div id="part2">
+            <p class="part2_font1">Supportive policies for China's smart car</p>
+            <p class="part2_font2">China will come up with its own smart car standards, traffic rules, laws and regulations relating to safety, according to the China Industry Innovation Alliance for the Intelligent and Connected Vehicles.</p>
+            <button>Check out Features</button><button>Try product for Free</button>
+        </div>
+        <div id="part3">
+            <h2>Try Our Awesome Products</h2>
+            <div id="products">
+                <div class="products_box">
+                    <div class="products_title">
+                    <img src="images/part3_title1.png">
+                    </div>
+                    <p>Li Jun, a China Academy of Engineering academician and also director of the alliance's experts' committee, said that China will also launch design guidance for smart cars, smart map architecture and standards for test grounds.</p>
+                </div>
+                <div class="products_box">
+                    <div class="products_title">
+                    <img src="images/part3_title2.png">
+                    </div>
+                    <p>Li said the smart car industry is able to enlarge the current car industry by 1 trillion yuan ($158.15 billion) and also able to boost fast development in 5G, internet of cars, big data, artificial intelligence and new-energy vehicles.</p>
+                </div>
+                <div class="products_box">
+                    <div class="products_title">
+                    <img src="images/part3_title3.png">
+                    </div>
+                    <p>Zhang Junyi, a partner with NIO Capital, said that the smart car is the trend for the car industry and China's auto sector will usher in a new key development stage with the improvement of infrastructure, technology, policies and laws.</p>
+                </div>
+            </div>
+        </div>
+        <div id="part4">
+            <div id="feature1">
+                <img class="pic1" src="images/part4_pic1.png">
+                <div class="feature">
+                    <h3>Learn How to Improve Your Personal Business</h3>
+                    <p>Li Jun, a China Academy of Engineering academician and also director of the alliance's experts' committee, said that China will also launch design guidance for smart cars, smart map architecture and standards for test grounds.</p>
+                </div>
+            </div>
+            <div id="feature2">
+                <div class="feature">
+                    <h3>Choose Between Two Beautifully Designed Color Schemes.</h3>
+                    <p>China will come up with its own smart car standards, traffic rules, laws and regulations relating to safety, according to the China Industry Innovation Alliance for the Intelligent and Connected Vehicles.</p>
+                </div>
+                <img class="pic2" src="images/part4_pic2.png">
+            </div>
+        </div>
+        <div id="part5">
+            <h2>Our Awesome Crew</h2>
+            <p>Our unique online teaching style makes learning easy for everyone. Whether you are trying to land a new job, brush up on your skills.</p>
+            <div id="team">
+                <div class="team_box">
+                    <img src="images/part5_pic1.png">
+                    <div class="layer">
+                        <h4>Ethan Dutton</h4>
+                        <h5>Senior Visual Designer</h5>
+                        <div><img src="images/layer_icon.png" width="218px" height="59px"></div>
+                    </div>
+                </div>
+                <div class="team_box">
+                    <img src="images/part5_pic2.png">
+                    <div class="layer">
+                        <h4>Ethan Dutton</h4>
+                        <h5>Senior Visual Designer</h5>
+                        <div><img src="images/layer_icon.png" width="218px" height="59px"></div>
+                    </div>
+                </div>
+                <div class="team_box">
+                    <img src="images/part5_pic3.png">
+                    <div class="layer">
+                        <h4>Ethan Dutton</h4>
+                        <h5>Senior Visual Designer</h5>
+                        <div><img src="images/layer_icon.png" width="218px" height="59px"></div>
+                    </div>
+                </div>
+                <div class="team_box">
+                    <img src="images/part5_pic4.png">
+                    <div class="layer">
+                        <h4>Ethan Dutton</h4>
+                        <h5>Senior Visual Designer</h5>
+                        <div><img src="images/layer_icon.png" width="218px" height="59px"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="part6">
+            <div id="sendForm">
+                <h3>Fell free to Write Us</h3>
+                <input type="email" placeholder="E-mail" name="email">
+                <input type="text"  placeholder="Subject" name="subject">
+                <textarea placeholder="Message" name="message" form="sendForm"></textarea>
+                <input type="button" value="SEND" name="send">
+            </div>
+            <div id="contacts">
+                <h2>Contacts</h2>
+                <p>Make any design your own using the Style Editor. Personalize fonts, colors, and layouts to create the custom look you want.</p>
+                <ul class="list">
+                    <li><div class="icon"><img src="images/part6_icon1.png"></div>
+                        <span class="list_font">360 King Street<br>Feastrvale Trevose, PA 19057</span></li>
+                    <li><div class="icon"><img src="images/part6_icon2.png"></div>
+                        <span class="list_font">(755) 564-84-12</span></li>
+                    <li><div class="icon"><img src="images/part6_icon3.png"></div>
+                        <span class="list_font">youname@mail.com</span></li>
+                </ul>
+            </div>
+        </div>
+        <div id="footer">
+            <ul id="menu">
+                <li><h3>Learn More</h3>
+                    <a href="#">How it works?</a>
+                    <a href="#">Meeting tools</a>
+                    <a href="#">Live streaming</a>
+                    <a href="#">Contact method</a>
+                </li>
+                <li><h3>About Us</h3>
+                    <a href="#">About us</a>
+                    <a href="#">Features</a>
+                    <a href="#">Privacy police</a>
+                    <a href="#">Terms & Conditions</a>
+                </li>
+                <li><h3>Support</h3>
+                    <a href="#">F.A.Q.</a>
+                    <a href="#">Contact us</a>
+                    <a href="#">Live chat</a>
+                    <a href="#">Phone call</a>
+                </li>
+                <li><h3>Enjoy your Life</h3>
+                    <p>Great web UI kit for designers, freelancers or business.</p>
+                    <div id="footer_icon"><img src="images/footer_icon1.png">
+                        <img src="images/footer_icon2.png">
+                        <img src="images/footer_icon3.png">
+                        <img src="images/footer_icon4.png">
+                        <img src="images/footer_icon5.png">
+                        <img src="images/footer_icon6.png">
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
