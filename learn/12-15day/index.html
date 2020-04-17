@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    body,ul{
+        margin: 0;
+        padding: 0;
+    }
+    ul{
+        list-style: none;
+    }
+    #menu{
+        position: fixed;
+        width: 354px;
+        height: 100%;
+    }
+    #primary{
+        position: relative;
+        float: left;
+        width: 104px;
+        height: 100%;
+        background-color: #1d2531;
+        padding-top: 22px;
+    }
+    #secondary{
+        float: left;
+        width: 250px;
+        height: 100%;
+        background-color: #222c3c;
+    }
+    .items{
+        margin:0 auto 22px;
+        width: fit-content;
+    }
+    .activeIcon{
+        position: absolute;
+        left: 0;
+        width: 11px;
+        background-image:url(images/activeIcon.png);
+        height:60px;
+        display: none;
+    }
+    .items:hover .activeIcon{
+        display: block;
+    }
+    #bottomAction{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 36px;
+        width:100%;
+
+    }
+    #gridBtn{
+        float: left;
+        margin-left: 27px;
+    }
+    #setBtn{
+        float: left;
+        margin-left: 17px;
+    }
+    #secondary{
+        color: #FFF;
+        padding-top: 7px;
+        position: relative;
+    }
+    .menu_box{
+        overflow: auto;
+        list-style:none;
+        margin: 0;
+        padding:22px 30px 20px 32px;
+    }
+    .menu_box li::before{
+        position: relative;
+        content: '';
+        background: no-repeat url(images/listIcon.png);
+        height: 38px;
+        width: 32px;
+        vertical-align: middle;
+        padding-top: 6px;
+        margin-left: -32px;
+        background-origin: content-box;
+        display: inline-block;
+        box-sizing: border-box;
+        z-index: -1;
+    }
+    .menu_box li:hover{
+        z-index: 1;
+        color: #FFF;
+    }
+    .menu_box li{
+       position: relative;
+       height: 38px;
+       font-size: 14px;
+       color: #b7c0cd;
+    }
+    .title{
+        overflow: auto;
+        margin-bottom: 12px;
+    }
+    .title h3{
+        float:left;
+        font-size: 12px;
+        width: fit-content;
+        margin: 0;
+        text-transform: uppercase;
+        color: #5b6779;
+    }
+    .titleIcon{
+        float: right;
+        width: fit-content;
+    }
+    .border{
+        border: solid 0.5px #2a3547;
+        margin: 0 30px 0 32px;
+    }
+    #capacity{
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 60px;
+        padding: 0 30px 24px 32px;
+        box-sizing: border-box;
+    }
+    #capacity p{
+        font-size: 13px;
+        margin: 0 0 10px;
+    }
+    #capacity span{
+        float: right;
+    }
+    #lineWrap{
+        width: 100%;
+        height: 5px;
+        border-radius: 2px;
+        background-color: #2d3848;
+    }
+    #line{
+        width: 44px;
+        height: 5px;
+        left: 0;
+        top:0;
+        border-radius: 2px;
+        background:linear-gradient(to right,#7857d6,#9286d4);
+    }
+    .listIcon{
+        vertical-align: middle;
+        margin-right: 10px;
+    }
+    .notification{
+        float: right;
+        width: 33px;
+        height: 24px;
+        line-height: 24px;
+        border-radius: 16px;
+        font-size: 14px;
+        color: #FFF;
+        background-color: #289df4;
+        text-align: center;
+        margin-top: 7px;
+    }
+    .alertIcon{
+        float: right;
+        margin-top: 7px;
+    }
+    #chat{
+        overflow: auto;
+        margin-left: 354px;
+        padding-top: 80px;
+    }
+    #topBar{
+        position: fixed;
+        margin-left: 354px;
+        width: calc(100% - 354px);
+        background-color: #FFF;
+        height: 80px;
+        text-align: left;
+        line-height: 80px;
+        font-size: 24px;
+        padding-left: 30px;
+        border-bottom: solid 1px #e6e9ec;
+        z-index: 999;
+    }
+    #profile{
+        float: right;
+        width: 235px;
+        line-height: normal;
+        margin: 14px 30px 0 0;
+    }
+    #profile div{
+        float: left;
+    }
+    #name{
+        margin: 6px 0 0 16px;
+        width: 110px;
+    }
+    #name p{
+        margin: 0;
+        font-size: 16px;
+        color: #2399f1;
+    }
+    #name p:last-of-type{
+        font-size: 13px;
+        color: #b5b5b5;
+        margin-top: 2px;
+    }
+    #dropDown{
+        width: 44px;
+        height: 52px;
+        text-align: center;
+        line-height: 52px;
+    }
+    #leftHand{
+        width: 400px;
+        border-right: solid 1px #e6e9ec;
+        float: left;
+    }
+    #sreach{
+        position: relative;
+        padding: 16px 30px;
+        border-bottom: solid 1px #e6e9ec;
+    }
+    #sreach input{
+        display: block;
+        width: 100%;
+        height:36px;
+        border: solid 1px #e6e9ec;
+        border-radius: 4px;
+        padding-left: 15px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    #sreach input::-webkit-input-placeholder{
+        color: #b5bcc9;
+    }
+    #sreach img{
+        position: absolute;
+        right: 45px;
+        top: 26px;
+    }
+    #chatList{
+        background: #FFF;
+    }
+    .listBox{
+        position: relative;
+        height: 130px;
+        border-bottom: solid 1px #e6e9ec;
+        padding: 15px 20px 22px 30px;
+        box-sizing: border-box;
+    }
+    .listPhoto{
+        width: 66px;
+        float: left;
+    }
+    .listHeader{
+        overflow: auto;
+    }
+    .list-where{
+        margin:3px 0;
+        color: #b5b5b5;
+        font-size: 14px;
+    }
+    .list-name{
+        font-size: 16px;
+        color: #585d68;
+        margin: 5px 0 0;
+        font-weight: bold;
+    }
+    .is-click{
+        color: #2399f1;
+    }
+    .listStatus{
+        margin-right: 6px;
+        display: none;
+    }
+    .is-status{
+        display: inline-block;
+     }
+    .listTime{
+        float: right;
+        font-size: 14px;
+        color: #7f8fa4;
+    }
+    .listIntro{
+        margin-top: 6px;
+    }
+    .list-intro{
+        font-size: 13px;
+        color: #585d68;
+        margin: 0;
+        display: -webkit-box;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+.list-notification{
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #289df4;
+    color: #FFF;
+    display: block;
+    text-align: center;
+    float: right;
+    margin-top: 5px;
+    display: none;
+}
+.is-notification{
+    display: block;
+}
+.listBox::before{
+    position: absolute;;
+    height: 130px;
+    content: '';
+    border-left: solid 3px #2399f1;
+    margin: -15px 0 0 -30px;
+    z-index: -1;
+}
+.listBox:hover
+{
+    z-index: 0;
+}
+#rightHand{
+    margin-left: 400px;
+}
+#tools-wrap{
+    height: 68px;
+    line-height: 68px;
+    border-bottom: solid 1px #e6e9ec;
+    padding-left: 30px;
+}
+#profile-name{
+    font-size: 18px;
+    float: left;
+}
+#profile-name::after{
+    content: '';
+    position: relative;
+    display: inline-block;
+    right: -8px;
+    content: '';
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #1bb934;
+}
+#tools{
+    width: 109px;
+    height: 32px;
+    background: url(images/toolIcon.png);
+    float: right;
+    margin: 18px 47px 0 0;
+}
+#tools::before{
+    content: '';
+    position: relative;
+    float: right;
+    margin-right: -25px;
+    width: 1px;
+    height: 32px;
+    background-color: #f0f1f4;
+}
+#tools li{
+    width: 36px;
+    float: left;
+    height: 100%;
+}
+#skip{
+    width: 73px;
+    height: 32px;
+    margin: 18px 20px 0 0;
+    background: url(images/skip.png);
+    float: right;
+}
+#skip li{
+    width: 36px;
+    float: left;
+    height: 100%;
+}
+#skip-num{
+    float: right;
+    width: fit-content;
+    margin: 0 16px 0 0;
+    font-size: 13px;
+}
+.message-box{
+    margin:0 52px 20px 30px;
+    overflow: auto;
+}
+.message-box{
+
+}
+.message-content-wrap{
+    margin-left: 68px;
+}
+.message-title{
+    overflow: auto;
+    height: 30px;
+    padding-top: 3px
+}
+.message-name{
+    font-size: 16px;
+}
+.message-time{
+    font-size: 14px;
+    color: #7f8fa4;
+    margin-left: 10px;
+}
+.message-content{
+    font-size: 14px;
+}
+.message-photo{
+    float: left;
+    width: 68px;
+}
+#open-chat{
+    padding-top: 25px;
+}
+.message-data-wrap{
+    border: none;
+    border-top: solid 1px #d9dde3;
+}
+.message-data{
+    font-size: 14px;
+    text-align: center;
+    color: #7f8fa4;
+    padding: 0 16px;
+}
+.message-new-data-wrap{
+    border: none;
+    border-top: solid 1px #a7d6f9;
+}
+.message-new-data{
+    font-size: 14px;
+    text-align: center;
+    color: #2399f1;
+    padding: 0 16px;
+}
+#message-write-wrap{
+    margin:20px 30px;
+    position: relative;
+}
+#message-write-btn{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 54px;
+    height: 54px;
+    background: url(images/addIcon.png);
+    border: none;
+}
+#message-write{
+    height: 54px;
+    display: block;
+    margin-left: 54px;
+    width: calc(100% - 54px);
+    border: solid 1px #dfe3e9;
+    border-left: none;
+    box-sizing: border-box;
+    padding-left: 10px;
+    font-size: 14px;
+}
+.message-video-wrap{
+    overflow: auto;
+}
+.message-video-box{
+    position: relative;
+    width: 156px;
+    height: 100px;
+    float: left;
+    margin: 15px 15px 0 0;
+    overflow: hidden;
+}
+.message-video-box img{
+    display: block;
+}
+.message-video-layer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    background: rgb(0, 0, 0);
+    opacity: 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+.message-video-box:hover
+.message-video-layer{
+    transition: all 0.2s ease;
+    visibility: visible;
+    opacity: 0.5;
+}
+
+.message-video-layer:hover
+.message-video-layerIcon{
+    transform: scale(1);
+    transition: all 0.2s ease;
+}
+.message-video-layerIcon{
+    width: 50px;
+    height: 50px;
+    background: url(images/videoLayer.png);
+    margin: 25px auto 0;
+    transform: scale(1.5);
+    transition: all 0.2s ease;
+    
+}
+    </style>
+</head>
+<body>
+    <div id="menu">
+        <div id="primary">
+            <div class="items"><div class="activeIcon"></div><img src="images/item1.png"></div>
+            <div class="items"><div class="activeIcon"></div><img src="images/item2.png"></div>
+            <div class="items"><div class="activeIcon"></div><img src="images/item3.png"></div>
+            <div class="items"><div class="activeIcon"></div><img src="images/addItem.png"></div>
+            <div id="bottomAction">
+                <div id="gridBtn"><img src="images/gridIcon.png"></div>
+                <div id="setBtn"><img src="images/setIcon.png"></div>
+            </div>
+        </div>
+        <div id="secondary">
+            <ul class="menu_box">
+                <div class="title"><h3>Menu</h3><img class="titleIcon" src="images/titleIcon.png"></div>
+                <li class="tt">Overview</li>
+                <li>Sales<span class="notification">54</span></li>
+                <li>Your Staff</li>
+                <li>Analytics & Targeting</li>
+                <li>What’s New</li>
+            </ul>
+            <hr class="border">
+            <ul class="menu_box">
+                    <div class="title"><h3>Your Products</h3><img class="titleIcon" src="images/titleIcon.png"></div>
+                    <li><img class="listIcon" src="images/icon1.png">Books</li>
+                    <li><img class="listIcon" src="images/icon2.png">Tutorials</li>
+                    <li><img class="listIcon" src="images/icon3.png">Stocks</li>
+                    <li><img class="listIcon" src="images/icon4.png">Infographics</li>
+            </ul>
+            <hr class="border">
+            <ul class="menu_box">
+                    <div class="title"><h3>Dashboard</h3><img class="titleIcon" src="images/titleIcon.png"></div>
+                    <li>Messages<span class="notification">21</span></li>
+                    <li>Connections</li>
+                    <li>Integrations<img class="alertIcon" src="images/alertIcon.png"></li>
+                    <li>Account Settings</li>
+                    <li>App Settings</li>
+            </ul>
+            <div id="capacity">
+                <p>Monthly Goals<span>$580/$3200</span></p>
+                <div id="lineWrap"><div id="line"></div></div>
+            </div>
+        </div>
+    </div>
+    <div id="topBar">
+        Messages
+        <div id="profile">
+            <div id="photo"><img src="images/person0.png"></div>
+            <div id="name"><p>Jordan J.</p><p>Administrator</p></div>
+            <div id="dropDown"><img src="images/dropIcon.png"></div>
+        </div>
+    </div>
+    <div id="chat">  
+        <div id="leftHand">
+            <div id="sreach">
+                    <img src="images/sreachIcon.png">
+                <input type="text" placeholder="search">
+            </div>
+            <ul id="chatList">
+                <li class="listBox">
+                    <div class="listHeader">
+                        <div class="listPhoto"><img src="images/person1.png"></div>
+                        <div class="listName">
+                            <p class="list-name is-click"><img class="listStatus is-status" src="images/status.png">Bessie Berry<span class="listTime">3m</span></p>
+                            <p class="list-where">Twitter</p>
+                        </div>
+                    </div>
+                    <div class="listIntro">
+                        <span class="list-notification is-notification">4</span>
+                        <p class="list-intro">I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable...</p>
+                    </div>
+                </li>
+                <li class="listBox">
+                    <div class="listHeader">
+                        <div class="listPhoto"><img src="images/person2.png"></div>
+                        <div class="listName">
+                            <p class="list-name"><img class="listStatus" src="images/status.png">Victor Weber<span class="listTime">8m</span></p>
+                            <p class="list-where">Adobe</p>
+                        </div>
+                    </div>
+                    <div class="listIntro">
+                        <span class="list-notification">4</span>
+                        <p class="list-intro ">I shared this on my fb wall a few months back, and I thought I'd share it here again because it's such a great...</p>
+                    </div>
+                </li>
+                <li class="listBox">
+                    <div class="listHeader">
+                        <div class="listPhoto"><img src="images/person3.png"></div>
+                        <div class="listName">
+                            <p class="list-name">
+                                <img class="listStatus" src="images/status.png">Dustin Benson<span class="listTime">Yesterday</span></p>
+                            <p class="list-where">Facebook</p>
+                        </div>
+                    </div>
+                    <div class="listIntro">
+                        <span class="list-notification ">4</span>
+                        <p class="list-intro">If there is anyone who needs an invitation please add yourself in the comments of this post!</p>
+                    </div>
+                </li>
+                <li class="listBox">
+                        <div class="listHeader">
+                            <div class="listPhoto"><img src="images/person4.png"></div>
+                            <div class="listName">
+                                <p class="list-name">
+                                    <img class="listStatus" src="images/status.png">Jack Mason<span class="listTime">Yesterday</span></p>
+                                <p class="list-where">Yahoo</p>
+                            </div>
+                        </div>
+                        <div class="listIntro">
+                            <span class="list-notification ">4</span>
+                            <p class="list-intro">BruteDC is a peer-to-peer movie+tv series sharing and downloading platform which works on intranet inside...</p>
+                        </div>
+                </li>
+                <li class="listBox">
+                        <div class="listHeader">
+                            <div class="listPhoto"><img src="images/person5.png"></div>
+                            <div class="listName">
+                                <p class="list-name">
+                                    <img class="listStatus" src="images/status.png">Stephen Shelton<span class="listTime">13 Jun</span></p>
+                                <p class="list-where">Snapchat</p>
+                            </div>
+                        </div>
+                        <div class="listIntro">
+                            <span class="list-notification ">4</span>
+                            <p class="list-intro">Yes, p2p traffic is often filtered (QoSed). Although i do use BT on O2 wires, and in good days dl speed...</p>
+                        </div>
+                </li>
+                <li class="listBox">
+                        <div class="listHeader">
+                            <div class="listPhoto"><img src="images/person6.png"></div>
+                            <div class="listName">
+                                <p class="list-name">
+                                    <img class="listStatus" src="images/status.png">Sally Willis<span class="listTime">12 Jun</span></p>
+                                <p class="list-where">Twitter</p>
+                            </div>
+                        </div>
+                        <div class="listIntro">
+                            <span class="list-notification ">4</span>
+                            <p class="list-intro">Yes, it's O2: 'internet extreme', which is no longer offered.</p>
+                        </div>
+                </li>
+                <li class="listBox">
+                        <div class="listHeader">
+                            <div class="listPhoto"><img src="images/person7.png"></div>
+                            <div class="listName">
+                                <p class="list-name">
+                                    <img class="listStatus" src="images/status.png">Robert Patton<span class="listTime">9 Jun</span></p>
+                                <p class="list-where">A Team</p>
+                            </div>
+                        </div>
+                        <div class="listIntro">
+                            <span class="list-notification ">4</span>
+                            <p class="list-intro">I change my service from this 4Mb plan to their much cheaper 8Mb plan, my speed will dramatically decrease.</p>
+                        </div>
+                </li>
+            </ul>
+        </div>
+        <div id="rightHand">
+                <div id="tools-wrap">
+                    <div id="profile-name">Bessie Berry</div>
+                    <ul id="skip"><li></li><li></li></ul>
+                    <p id="skip-num">1 of 28</p>
+                    <ul id="tools"><li></li><li></li><li></li></ul>
+                </div>
+                <div id="open-chat">
+                        <div class="message-box">
+                                <div class="message-photo"><img src="images/person1.png"></div>
+                            <div class="message-content-wrap">
+                                <div class="message-title">
+                                <font class="message-name">Bessie Berry</font>
+                                <font class="message-time">8:31 AM</font>
+                                </div>
+                                <div class="message-content">Hi guys Ive got the O2 package and have really slow internet. A speed check online said i can get 3mbps but it seems more like 0.5 these days, just freezing and taking ages to open pages and open audio files for example. I have decided to switch to the UPC package which offers 10mbps but do you think i will get it?</div>
+                            </div>
+                        </div>
+                        <div class="message-box">
+                                <div class="message-photo"><img src="images/person8.png"></div>
+                            <div class="message-content-wrap">
+                                <div class="message-title">
+                                <font class="message-name">Jordan Jackson</font>
+                                <font class="message-time">8:31 AM</font>
+                                </div>
+                                <div class="message-content">I have internet for 9 month and nevere could benefit from the full capacity of 5Mbit/s as it is filtered by O2 when it detect traffic on public p2p sharing in my situation all my internet speed slows to 512Kbit/s. I never had 400KB/s on when downloading from p2p public servers like torrent emule etc. I downoad with 500KB/s from private trakers instead. So conlcusion O2 block trafic on p2p connections. I have made hundreds of test in Italy and Sweden and Romania with the same file to doanload with the same setting and same antivirus and just needed to open ports in firewall and forward same ports and the speed was at full capacity in 1 minute. here in 9 month never had this luck.</div>
+                            </div>
+                        </div>
+
+                    <fieldset class="message-data-wrap">
+                        <legend class="message-data">Tuesday</legend>
+                        <div class="message-box">
+                            <div class="message-photo"><img src="images/person1.png"></div>
+                        <div class="message-content-wrap">
+                            <div class="message-title">
+                            <font class="message-name">Bessie Berry</font>
+                            <font class="message-time">8:31 AM</font>
+                            </div>
+                            <div class="message-content">Funny comparison. so would the proper antivirus not slow down the internet as much or do you mean a freebie doenst protect the computer from viruses?</div>
+                        </div>
+                    </div>
+                    <div class="message-box">
+                            <div class="message-photo"><img src="images/person8.png"></div>
+                        <div class="message-content-wrap">
+                            <div class="message-title">
+                            <font class="message-name">Jordan Jackson</font>
+                            <font class="message-time">8:31 AM</font>
+                            </div>
+                            <div class="message-content">I pay for the 4Mb/sec down, 512 Kb/sec up service from O2, and haven't had any problems. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. I max out at about 3 Mb/sec down, and 350 Kb/sec up. Probably because of a noisy telephone line, not because I'm being throttled. When my uploads go over 25 KB/sec (note, bytes, not bits), my download speed suffers. This is expected, as downloads require upload bandwidth as well. </div>
+                            <ul class="message-video-wrap">
+                                <li class="message-video-box"><img src="images/pic1.png">
+                                    <a class="message-video-layer" href="#">
+                                        <div class="message-video-layerIcon"></div>
+                                    </a></li>
+                                <li class="message-video-box"><img src="images/pic1.png">
+                                    <a class="message-video-layer" href="#">
+                                        <div class="message-video-layerIcon"></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </fieldset>
+                   <fieldset class="message-new-data-wrap">
+                       <legend class="message-new-data">New Messages</legend>
+                       <div class="message-box">
+                        <div class="message-photo"><img src="images/person1.png"></div>
+                    <div class="message-content-wrap">
+                        <div class="message-title">
+                        <font class="message-name">Bessie Berry</font>
+                        <font class="message-time">8:31 AM</font>
+                        </div>
+                        <div class="message-content">I pay for the 4Mb/sec down, 512 Kb/sec up service from O2. In fact, it's relatively quick, and stable. It's not perfect, but I really don't have issues, as long as I keep track of what I'm doing on it. </div>
+                        </div>
+                    </div>
+                    <div id="message-write-wrap">
+                            <button id="message-write-btn"></button>
+                        <input id="message-write" type="text">
+                        
+                    </div>
+
+                   </fieldset>
+
+              
+                </div>
+                <div id="write-message">
+                </div>
+            </div>
+    </div>
+</body>
+</html>
