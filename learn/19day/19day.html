@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="news-top" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>JS</span><a class="active" href="">Some Link2</a></li>
+                    <li><span>CSS</span><a href="">Some Link3</a></li>
+                    <li><span>JS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>
+        <div id="news-normal" class="section">
+            <h3>Some title</h3>
+            <div class="content">
+                <ul>
+                    <li><span>HTML</span><a href="">Some Link1</a></li>
+                    <li><span>HTML</span><a href="">Some Link2</a></li>
+                    <li><span>JS</span><a class="active" href="#">Some Link3</a></li>
+                    <li><span>CSS</span><a href="">Some Link4</a></li>
+                </ul>
+            </div>
+            <img src="">
+            <p class="">Some Text</p>
+        </div>      
+    </div>
+    <script>
+
+    function getAllListItem() {
+        // 返回页面中所有li标签
+        var liNodes=document.getElementsByTagName('li');
+        return liNodes;
+    }
+
+    function getAllListItem1(){
+        var liNodes=document.querySelectorAll('li');
+        //console.log(liNodes);
+        return liNodes;
+    }
+    //getAllListItem1();
+
+    function findAllHtmlSpanInOneSection(sectionId) {
+        // 返回某个section下所有span中内容为HTML的span标签
+        var sectionNode=document.getElementById(sectionId);
+        var spanNodes=sectionNode.getElementsByTagName('span');
+        var spanNodesArray=Array.from(spanNodes);
+        var result=spanNodesArray.filter(function(x){ return x.innerText=='HTML';});
+        //console.log(result);
+        return result;
+    }
+    //findAllHtmlSpanInOneSection('news-top');
+
+    function findAllHtmlSpanInOneSection1(sectionId){
+        var spanNodes=document.querySelectorAll('#'+sectionId+' '+'span');
+        var spanNodesArray=Array.from(spanNodes);
+        var result=spanNodesArray.filter(function(x){return x.innerText=='HTML';});
+        //console.log(result);
+        return result;
+    }
+    //findAllHtmlSpanInOneSection1('news-normal');
+
+    function findListItem(sectionId, spanCont) {
+        // 返回某个section下，所有所包含span内容为spanCont的LI标签
+        var sectionNode=document.getElementById(sectionId);
+        var spanNodes=sectionNode.getElementsByTagName('span');
+        var spanNodesArray=Array.from(spanNodes);
+        var result=spanNodesArray.filter(function(x){ return x.innerText==spanCont;});
+        var liNodes=result.map(function(x){return x.parentNode});
+        //console.log(liNodes);
+        return liNodes;
+    }
+    //findListItem('news-normal','HTML');
+
+    function findListItem1(sectionId,spanCont){
+        var liNodes=document.querySelectorAll('#'+sectionId+' '+'li');
+        var liNodesArray=Array.from(liNodes);
+        var result=liNodesArray.filter(function(x){
+            return x.querySelector('span').innerText==spanCont;
+        });
+        //console.log(result);
+        return result;
+    }
+    //findListItem1('news-top','JS');
+
+    function getActiveLinkContent(sectionId) {
+        // 返回某个section下，class为active的链接中包含的文字内容
+        var section=document.getElementById(sectionId);
+        var activeNode=section.getElementsByClassName('active');
+        //console.log(activeNode[0].innerText);
+        return activeNode[0].innerText;
+    }
+    //getActiveLinkContent('news-normal');
+
+    function getActiveLinkContent1(sectionId){
+        var activeNode=document.querySelector('#'+sectionId+' '+'.active');
+        console.log(activeNode.innerText);
+        return activeNode.innerText;
+    }
+    //getActiveLinkContent1('news-normal');
+
+    </script>
+</body>
+</html>
