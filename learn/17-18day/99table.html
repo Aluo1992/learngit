@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+function multiplicationTable(){
+    var tdArray=[];
+        for(i=1;i<10;i++){
+            for(j=i;j<10;j++){
+                 tdArray.push(i+'*'+j+'='+i*j);
+            }
+        }
+    var tableContent='<caption>乘法表</caption>';
+    var k=8;
+    for(i=0;i<9;i++){
+        tableContent=tableContent+'<tr><td>'+tdArray[i]+'</td>';
+        var num=i;
+        for(j=0;j<i;j++){
+            num=num+k-j;
+            tableContent=tableContent+'<td>'+tdArray[num]+'</td>';
+        }
+        tableContent=tableContent+'</tr>';
+    }
+    var bodyNode=document.getElementsByTagName('body')[0];
+    var table=document.createElement('table');
+    table.innerHTML=tableContent;
+    bodyNode.appendChild(table);
+}
+multiplicationTable();
+    </script>
+</body>
+</html>

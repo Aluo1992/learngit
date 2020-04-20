@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="dec-number" type="number" placeholder="输入一个十进制非负整数">
+    <input id="bin-bit" type="number" placeholder="输入转化后二进制数字位数">
+    <button id="trans-btn">转化为二进制</button>
+    <p id="result">运算结果</p>
+    <script>
+    var result=document.getElementById('result');
+    var btn=document.getElementById('trans-btn');
+
+function dec2bin() {
+    var num=document.getElementById('dec-number').value;
+    var bit=document.getElementById('bin-bit').value;
+    if(check(num)&&check(bit)){
+        var numArray=[];
+        var Result='';
+        var nextNum;
+        do{
+        numArray.unshift(num%2);
+        nextNum=parseInt(num/2);
+        num=nextNum;
+        }while(nextNum>=1);
+        for(i=0;i<numArray.length;i++){
+            Result=Result+numArray[i]
+        }
+        if(bit>Result.length){
+            var str='0';
+            result.innerText=str.repeat(bit-Result.length)+Result;
+        }else{
+        result.innerText=Result;
+        }  
+        console.log('二进制：'+Result);
+    }else{
+        result.innerText='请输入非负的整数';
+    }
+}
+
+function check(n){//判断是否为非负整数
+    if(n.length>0&&n>=0&&n.indexOf('.')==-1){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+btn.addEventListener('click',dec2bin);
+</script>
+</body>
+</html>
