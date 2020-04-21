@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="fade-obj" style="width:300px;height:300px;background:#000"></div>
+    <button id="fade-btn">淡出</button>
+
+<script>
+    var btn=document.querySelector('#fade-btn');
+    var pic=document.querySelector('#fade-obj');
+
+    function fadeOut(){
+        btn.setAttribute('disabled',true);
+    if(btn.innerText=='淡出'){
+        var opacity=1;
+        var end=setInterval(function(){
+            opacity=(opacity*100-2)/100;
+            pic.style.opacity=opacity;
+            if(opacity<0){
+                window.clearInterval(end);
+                btn.disabled=false;
+                btn.innerText='淡入';
+            }
+        },50);
+    }
+    if(btn.innerText=='淡入'){
+        btn.setAttribute('disabled',true);
+        var opacity=0;
+        var end=setInterval(function(){
+            opacity=(opacity*100+2)/100;
+            pic.style.opacity=opacity;
+            if(opacity>=1){
+                clearInterval(end);
+                btn.disabled=false;
+                btn.innerText='淡出';
+            }
+        },50);
+    }
+    }
+    btn.addEventListener('click',fadeOut);
+</script>
+</body>
+</html>

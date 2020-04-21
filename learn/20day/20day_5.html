@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #smile{
+        background: url(smile.jpg);
+        width: 480px;
+        height: 480px;
+    }
+    </style>
+</head>
+<body>
+    <div id="smile"></div>
+    <script>
+    function smile(){
+        var pic=document.getElementById('smile');
+        pic.style.backgroundPositionY='8160px';
+        var direction='go';
+        setInterval(function(){
+           var h=pic.style.backgroundPositionY.replace('px','');
+           if(direction=='go'){
+                   h=h-480;
+                   pic.style.backgroundPositionY=h+'px';
+                if(h==0){
+                   direction='back';
+               }
+           }
+           if(direction=='back'){
+                   h=Number(h)+480;
+                   pic.style.backgroundPositionY=h+'px';
+                if(h==8160){
+                   direction='go';
+               }
+           }
+        },100);
+    }
+    smile();
+    </script>
+</body>
+</html>

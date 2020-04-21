@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        select {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <label>
+        <input id="school" name="status" type="radio">
+        School
+    </label>
+    <label>
+        <input id="company" name="status" type="radio">
+        Company
+    </label>
+
+    <select id="school-select">        
+        <option>北京邮电大学</option>
+        <option>黑龙江大学</option>
+        <option>华中科技大学</option>
+    </select>
+
+    <select id="company-select">        
+        <option>百度</option>
+        <option>爱奇艺</option>        
+    </select>
+    <script>
+    var school=document.getElementById('school');
+    var company=document.getElementById('company');
+    var schoolList=document.getElementById('school-select');
+    var companyList=document.getElementById('company-select');
+    function clickSchool(){
+        schoolList.setAttribute('style','display:block;');
+        companyList.setAttribute('style','display:none;');
+    }
+    school.addEventListener('click',clickSchool);
+    function clickCompany(){
+        companyList.setAttribute('style','display:block;');
+        schoolList.setAttribute('style','display:none;');
+    }
+    company.addEventListener('click',clickCompany);
+    </script>
+</body>
+</html>
