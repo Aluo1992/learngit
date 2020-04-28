@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var arr = [43, 54, 4, -4, 84, 100, 58, 27, 140];
+//将上面数组分别按从大到小以及从小到大进行排序后在console中输出
+function up(a,b){
+    return a-b;
+}
+
+function sort(arr){
+    var result=[].concat(arr);
+    result.sort(up);
+    console.log(result);
+    //console.log(typeof result[0]);
+}
+sort(arr);
+
+var arr = ['apple', 'dog', 'cat', 'car', 'zoo', 'orange', 'airplane'];
+//将上面数组分别按字母顺序a-z及z-a进行排序，在console中输出
+function sort1(arr){
+    var a_z=[].concat(arr);
+    var z_a=[].concat(arr);
+    a_z.sort();
+    z_a.sort().reverse();
+    console.log('a_z:'+a_z);
+    console.log('z_a:'+z_a);
+}
+sort1(arr);
+
+var arr = [[10, 14], [16, 60], [7, 44], [26, 35], [22, 63]];
+//将上面的二维数组，按照每个元素中第二个数从大到小的顺序进行排序输出，输出结果应该为：
+//[[22, 63], [16, 60], [7, 44], [26, 35], [10, 14]]
+
+function c(a,b){
+    var numA=a[1];
+    var numB=b[1];
+    return numB-numA;
+}
+function sort2(arr){
+    var result=[].concat(arr);
+    result.sort(c);
+    console.log(result);
+}
+sort2(arr);
+
+var arr = [
+    {
+        id: 1,
+        name: 'candy',
+        value: 40
+    }, {
+        id: 2,
+        name: 'Simon',
+        value: 50
+    }, {
+        id: 3,
+        name: 'Tony',
+        value: 45
+    }, {
+        id: 4,
+        name: 'Annie',
+        value: 60
+    }
+];
+//将上面数组分别按元素对象的value值从小到大进行排序后输出
+function c1(a,b){
+    var numA=a.value;
+    var numB=b.value;
+    return numA-numB;
+}
+function sort3(arr){
+    var result=[].concat(arr);
+    result.sort(c1);
+    console.log(result);
+}
+sort3(arr);
+    </script>
+</body>
+</html>

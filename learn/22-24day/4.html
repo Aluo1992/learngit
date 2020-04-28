@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    var tree = {
+    "id": 0,
+    "name": "root",
+    "left": {
+        "id": 1,
+        "name": "Simon",
+        "left": {
+            "id": 3,
+            "name": "Carl",
+            "left": {
+                "id": 7,
+                "name": "Lee",
+                "left": {
+                    "id": 11,
+                    "name": "Fate"
+                }
+            },
+            "right": {
+                "id": 8,
+                "name": "Annie",
+                "left": {
+                    "id": 12,
+                    "name": "Saber"
+                }
+            }
+        },
+        "right": {
+            "id": 4,
+            "name": "Tony",
+            "left": {
+                "id": 9,
+                "name": "Candy"
+            }
+        }
+    },
+    "right": {
+        "id": 2,
+        "name": "Apple",
+        "left": {
+            "id": 5,
+            "name": "Orange",
+        },
+        "right": {
+            "id": 6,
+            "name": "Pic",
+            "right": {
+                "id": 10,
+                "name": "Kai"
+            }        
+        }
+    }
+}
+
+// 假设id和name均不会重复，根据输入name找到对应的id
+
+function findIdByName(name) {
+    var go=true;
+    var result;
+    function find(name,obj){
+    for(key in obj){
+        if(obj[key]==name){
+        //console.log('/////'+obj.id);
+        go=false;
+        result=obj.id;
+        }
+        if(key=='left'){
+        //console.log('左子树：');
+        //console.log(obj[key]);
+        find(name,obj[key]);
+        }
+        if(key=='right'){
+        //console.log('右子树');
+        //console.log(obj[key]);
+        find(name,obj[key]);
+        }
+        if(go==false){return;}
+    }
+    }
+    find(name,tree);
+    return result;
+}
+//console.log(findIdByName('Kai'));
+
+// 假设id和name均不会重复，根据输入id找到对应的name
+function findNameById(id) {
+    var go=true;
+    var result;
+    function find(id,obj){
+    for(key in obj){
+        if(obj[key]==id){
+        go=false;
+        result=obj.name;
+        }
+        if(key=='left'){
+        find(id,obj[key]);
+        }
+        if(key=='right'){
+        find(id,obj[key]);
+        }
+        if(go==false){return;}
+    }
+    }
+    find(id,tree);
+    return result;
+}
+//console.log(findNameById(1));
+
+// 把这个对象中所有的名字以“前序遍历”的方式全部输出到console中
+function getListWithDLR(obj) {
+    for(key in obj){
+        //console.log('key：'+key);
+        if(key=='name'){
+           console.log(obj[key]);
+        }
+        if(key=='left'){
+        getListWithDLR(obj[key]);
+        }
+        if(key=='right'){
+        getListWithDLR(obj[key]);
+        }
+    }
+}
+//getListWithDLR(tree);
+
+// 把这个对象中所有的名字以“中序遍历”的方式全部输出到console中
+function getListWithLDR(obj) {
+    var stock=[obj];
+    function t(obj){
+    var left=false;
+    for(key in obj){
+        if(key=='left'){
+            left=true;
+        }
+    }
+    if(left){
+        stock.push(obj['left']);
+        t(obj['left']);
+    }else{
+        console.log(obj.name);
+        stock.pop();
+    }
+    if(stock.length>0){
+        var obj=stock.pop();
+        console.log(obj.name);
+        var right=false;
+        for(key in obj){
+            if(key=='right'){
+                right=true;
+            }
+        }
+        if(right){
+            stock.push(obj['right']);
+            t(obj['right']);
+        }
+    }
+    }
+    t(obj);
+}
+//getListWithLDR(tree);
+
+// 把这个对象中所有的名字以“后序遍历”的方式全部输出到console中
+function getListWithLRD(obj) {
+    var stock=[obj];
+    function t(obj){
+    var left=false;
+    for(key in obj){
+        if(key=='left'){
+            left=true;
+        }
+    }
+    if(left){
+        stock.push(obj['left']);
+        t(obj['left']);
+    }
+    if(stock.length>0){
+        var right=false;
+        for(key in obj){
+            if(key=='right'){
+                right=true;
+            }
+        }
+        if(right){
+            stock.push(obj['right']);
+            t(obj['right']);
+        }
+            console.log(obj.name);
+            stock.pop();
+    }
+    }
+    t(obj);
+}
+getListWithLRD(tree);
+
+
+
+</script>
+</body>
+</html>

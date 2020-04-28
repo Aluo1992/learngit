@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #str-b{
+        white-space: pre-wrap;
+        width: 60px;
+        height: 50px;
+        resize: none;
+    }
+    </style>
+</head>
+<body>
+    <div>
+    <label>String A:
+        <input id="radio-a" type="radio" checked="true" name="str-obj" value="a">
+    </label>
+    <textarea id="str-a"></textarea>
+    <label>String B:
+        <input id="radio-b" type="radio" name="str-obj" value="b">
+    </label>
+    <textarea id="str-b"></textarea>        
+    <label>Num A：<input id="num-a" type="number" value="0"></label>
+    <label>Num B：<input id="num-b" type="number" value="1"></label>
+</div>
+<div>
+    <button id="btn1">获取当前选中输入的内容长度</button>
+    <button id="btn2">当前选中输入中的第3个字符</button>
+    <button id="btn3">把两个输入框的文字连接在一起输出（concat）</button>
+    <button id="btn4">输入B中的内容，在输入A的内容中第一次出现的位置（indexOf）</button>
+    <button id="btn5">输入A中的内容，在输入B的内容中最后一次出现的位置（lastIndexOf）</button>
+    <button id="btn6">使用slice获取选中输入框内容的部分内容，参数为num-a及num-b</button>
+    <button id="btn7">当前选中输入框的行数</button>
+    <button id="btn8">使用substr获取选中输入框内容的子字符串，参数为num-a及num-b</button>
+    <button id="btn9">把所选输入框中的内容全部转为大写</button>
+    <button id="btn10">把所选输入框中的内容全部转为小写</button>
+    <button id="btn11">把所选输入框中内容的半角空格全部去除</button>
+    <button id="btn12">把所选输入框中内容的a全部替换成另外一个输入框中的内容</button>
+</div>
+<p id="result"></p>
+<script>
+    var btn1=document.getElementById('btn1');
+    var btn2=document.getElementById('btn2');
+    var btn3=document.getElementById('btn3');
+    var btn4=document.getElementById('btn4');
+    var btn5=document.getElementById('btn5');
+    var btn6=document.getElementById('btn6');
+    var btn7=document.getElementById('btn7');
+    var btn8=document.getElementById('btn8');
+    var btn9=document.getElementById('btn9');
+    var btn10=document.getElementById('btn10');
+    var btn11=document.getElementById('btn11');
+    var btn12=document.getElementById('btn12');
+
+function getCheckedRadio(name){
+    var radioNodes=document.getElementsByName(name);
+    var checkedRadio=[];
+    for(i=0;i<radioNodes.length;i++){
+        if(radioNodes[i].checked==true){
+            checkedRadio.push(radioNodes[i]);
+        }
+    }
+    if(checkedRadio.length==0){
+        console.log('没选中字符串');
+    }else if(checkedRadio.length==1){
+        return checkedRadio[0];
+    }else{
+        return checkedRadio;
+    }
+}
+
+function clickBtn1(){
+    var radio=getCheckedRadio('str-obj');
+    var str=document.getElementById('str-'+radio.value).value;
+    var p=document.getElementById('result');
+    p.innerText=str.length;
+}
+btn1.addEventListener('click',clickBtn1);
+
+function clickBtn2(){
+    var radio=getCheckedRadio('str-obj');
+    var str=document.getElementById('str-'+radio.value).value;
+    var p=document.getElementById('result')
+    p.innerText=str.charAt(2);
+}
+btn2.addEventListener('click',clickBtn2);
+
+function clickBtn3(){
+    var strA=document.getElementById('str-a').value;
+    var strB=document.getElementById('str-b').value;
+    var p=document.getElementById('result');
+    p.innerText=strA.concat(strB);
+}
+btn3.addEventListener('click',clickBtn3);
+
+function clickBtn4(){
+    var strA=document.getElementById('str-a').value;
+    var strB=document.getElementById('str-b').value;
+    var p=document.getElementById('result')
+    if(strA.indexOf(strB)==-1){
+        p.innerText='A中没有B的内容';
+    }else{
+        p.innerText=strA.indexOf(strB);
+    }
+}
+btn4.addEventListener('click',clickBtn4);
+
+function clickBtn5(){
+    var strA=document.getElementById('str-a').value;
+    var strB=document.getElementById('str-b').value;
+    var p=document.getElementById('result')
+    if(strA.lastIndexOf(strB)==-1){
+        p.innerText='A中没有B的内容';
+    }else{
+        p.innerText=strA.lastIndexOf(strB);
+    }
+}
+btn5.addEventListener('click',clickBtn5);
+
+function clickBtn6(){
+    var radio=getCheckedRadio('str-obj').value;
+    var str=document.getElementById('str-'+radio).value;
+    var numA=document.getElementById('num-a').value;
+    var numB=document.getElementById('num-b').value;
+    var p=document.getElementById('result');
+    p.innerText=str.slice(numA,numB);
+}
+btn6.addEventListener('click',clickBtn6);
+
+function clickBtn7(){
+    var radio=getCheckedRadio('str-obj').value;
+    var textarea=document.getElementById('str-'+radio);
+    var p=document.getElementById('result');
+    p.innerText=textarea.value.split(/\n/);
+}
+btn7.addEventListener('click',clickBtn7);
+
+function clickBtn8(){
+    var radio=getCheckedRadio('str-obj').value;
+    var str=document.getElementById('str-'+radio).value;
+    var numA=document.getElementById('num-a').value;
+    var numB=document.getElementById('num-b').value;
+    var p=document.getElementById('result');
+    p.innerText=str.substr(numA,numB);
+}
+btn8.addEventListener('click',clickBtn8);
+
+function clickBtn9(){
+    var radio=getCheckedRadio('str-obj').value;
+    var str=document.getElementById('str-'+radio).value;
+    var p=document.getElementById('result');
+    p.innerText=str.toLocaleUpperCase();
+}
+btn9.addEventListener('click',clickBtn9);
+
+function clickBtn10(){
+    var radio=getCheckedRadio('str-obj').value;
+    var str=document.getElementById('str-'+radio).value;
+    var p=document.getElementById('result');
+    p.innerText=str.toLocaleLowerCase();
+}
+btn10.addEventListener('click',clickBtn10);
+
+function clickBtn11(){
+    var radio=getCheckedRadio('str-obj').value;
+    var str=document.getElementById('str-'+radio).value;
+    var p=document.getElementById('result');
+    p.innerText=str.replace(/ /g,'');
+}
+btn11.addEventListener('click',clickBtn11);
+
+function clickBtn12(){
+    var radioNodes=document.getElementsByName('str-obj');
+    var checked,unChecked;
+    for(i=0;i<radioNodes.length;i++){
+        if(radioNodes[i].checked==true){
+            checked=radioNodes[i];
+        }else{
+            unChecked=radioNodes[i];
+        }
+    }
+    var checkedStr=document.getElementById('str-'+checked.value).value;
+    var unCheckedStr=document.getElementById('str-'+unChecked.value).value;
+    var str='';
+    var p=document.getElementById('result');
+    p.innerText=checkedStr.replace(/a/g,unCheckedStr);
+}
+btn12.addEventListener('click',clickBtn12);
+</script>
+</body>
+</html>

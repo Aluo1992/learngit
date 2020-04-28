@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+    <label>Number A:<input id="radio-a" type="radio" name="math-obj" value="a">
+    </label><input id="num-a" type="text">
+    <label>Number B:<input id="radio-b" type="radio" name="math-obj" value="b">
+    </label><input id="num-b" type="text">
+</div>
+<div>
+    <button id="btn1">判断当前选中的输入框输入内容是否为数字</button>
+    <button id="btn2">把 A 四舍五入为 B 个小数位数的数字</button>
+    <button id="btn3">当前选中数字的绝对值</button>
+    <button id="btn4">对当前选中的数字进行上舍入</button>
+    <button id="btn5">对当前选中的数字进行下舍入</button>
+    <button id="btn6">把当前选中的数字四舍五入为最接近的整数</button>
+    <button id="btn7">返回 A 和 B 中的最高值</button>
+    <button id="btn8">返回 A 和 B 中的最低值</button>        
+</div>
+<p id="result"></p>
+<script>
+    var labA=document.getElementById('radio-a');
+    var labB=document.getElementById('radio-b');
+
+    var btn1=document.getElementById('btn1');
+    var btn2=document.getElementById('btn2');
+    var btn3=document.getElementById('btn3');
+    var btn4=document.getElementById('btn4');
+    var btn5=document.getElementById('btn5');
+    var btn6=document.getElementById('btn6');
+    var btn7=document.getElementById('btn7');
+    var btn8=document.getElementById('btn8');
+
+    function clickBtn1(){
+        var radioNodes=document.querySelectorAll('input[type=radio]');
+        var radio={};
+        for(i=0;i<radioNodes.length;i++){
+            if(radioNodes[i].checked){
+               radio=radioNodes[i];
+            }
+        }
+        var num=document.getElementById('num-'+radio.value).value;
+        check(num);
+    }
+    btn1.addEventListener('click',clickBtn1);
+
+    function check(n){
+        if(n==''){
+            console.log('输入框的内容不能为空');
+            console.log('------------------');
+            return false;
+        }else{
+            var num=Number(n);
+            if(isNaN(num)){
+                console.log('输入框的内容不是数字');
+                console.log('------------------');
+                return false;
+            }
+        }
+        return true;
+    }
+    function checkInt(n){
+        if(n.indexOf('.')==-1){
+            return true;
+        }else{
+            console.log('输入的数字不是整数');
+            return false;
+        }
+    }
+    function returnCheckedInput(name){
+        var inputNodes=document.getElementsByName(name);
+        var checkedArray=[];
+        for(i=0;i<inputNodes.length;i++){
+            if(inputNodes[i].checked==true){
+                checkedArray.push(inputNodes[i]);
+            }
+        }
+        if(checkedArray.length==1){
+            return checkedArray[0];
+        }else{
+            return checkedArray;
+        }
+        if(checkedArray==[]){
+            return false;
+        }
+    }
+    function clickBtn2(){
+        var numA=document.getElementById('num-a').value;
+        var numB=document.getElementById('num-b').value;
+        if(check(numA)&&check(numB)&&checkInt(numB)){
+            var num;
+            if(numA.indexOf('.')==-1){
+                var str='0';
+                if(numB==0){
+                    num=numA
+                }else{
+                num=numA+'.'+str.repeat(numB);
+                }
+            }else{
+                var s=numA.split('.')[1];
+                if(s.length>numB){
+                    var n=s.slice(0,numB)+'.'+s.charAt(numB);
+                    n=Math.round(n);
+                    num=parseInt(numA)+'.'+n;
+                }
+                if(s.length<numB){
+                    var str='0';
+                    num=numA+str.repeat(numB-s.length);
+                }
+                if(s.length==numB){
+                    num=numA;
+                }            
+            }
+            var p=document.getElementById('result');
+            p.innerText=num;
+        }
+    }
+    btn2.addEventListener('click',clickBtn2);
+
+    function clickBtn3(){
+        if(returnCheckedInput('math-obj')==false){
+            console.log('没有选中数字');
+        }else{
+            var radio=returnCheckedInput('math-obj').value;
+            var num=document.getElementById('num-'+radio).value;
+            if(check(num)){
+                var p=document.getElementById('result');
+                p.innerText=Math.abs(num);
+            }
+        }
+    }
+    btn3.addEventListener('click',clickBtn3);
+
+    function clickBtn4(){
+        if(returnCheckedInput('math-obj')==false){
+            console.log('没有选中数字');
+        }else{
+            var radio=returnCheckedInput('math-obj').value;
+            var num=document.getElementById('num-'+radio).value;
+            if(check(num)){
+                var p=document.getElementById('result');
+                p.innerText=Math.ceil(num);
+            }
+        }
+    }
+    btn4.addEventListener('click',clickBtn4);
+
+    function clickBtn5(){
+        if(returnCheckedInput('math-obj')==false){
+            console.log('没有选中数字');
+        }else{
+            var radio=returnCheckedInput('math-obj').value;
+            var num=document.getElementById('num-'+radio).value;
+            if(check(num)){
+                var p=document.getElementById('result');
+                p.innerText=Math.floor(num);
+            }
+        }
+    }
+    btn5.addEventListener('click',clickBtn5);
+
+    function clickBtn6(){
+        if(returnCheckedInput('math-obj')==false){
+            console.log('没有选中数字');
+        }else{
+            var radio=returnCheckedInput('math-obj').value;
+            var num=document.getElementById('num-'+radio).value;
+            if(check(num)){
+                var p=document.getElementById('result');
+                p.innerText=Math.round(num);
+            }
+        }
+    }
+    btn6.addEventListener('click',clickBtn6);
+
+    function clickBtn7(){
+        var numA=document.getElementById('num-a').value;
+        var numB=document.getElementById('num-b').value;
+        if(check(numA)&&check(numB)){
+            var p=document.getElementById('result');
+            if(numA-numB>0){
+                p.innerText=numA;
+            }else if(numA-numB<0){
+                p.innerText=numB;
+            }else{
+                p.innerText='A与B值相等';
+            }
+        }
+    }
+    btn7.addEventListener('click',clickBtn7);
+
+    function clickBtn8(){
+        var numA=document.getElementById('num-a').value;
+        var numB=document.getElementById('num-b').value;
+        if(check(numA)&&check(numB)){
+            var p=document.getElementById('result');
+            if(numA-numB>0){
+                p.innerText=numB;
+            }else if(numA-numB<0){
+                p.innerText=numA;
+            }else{
+                p.innerText='A与B值相等';
+            }
+        }
+    }
+    btn8.addEventListener('click',clickBtn8);
+</script>
+</body>
+</html>

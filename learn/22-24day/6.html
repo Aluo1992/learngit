@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input id="stack-input" type="text">
+<p id="stack-cont">栈内容：apple-&gt;pear</p>    
+<button id="push-btn">进栈</button>
+<button id="pop-btn">退栈</button>
+<button id="font-btn">打印栈顶元素内容</button>
+<button id="empty-btn">判断栈是否为空</button>
+
+<script>
+
+var stack = ["apple", "pear"];
+var p=document.getElementById('stack-cont');
+var btn1=document.getElementById('push-btn');
+var btn2=document.getElementById('pop-btn');
+var btn3=document.getElementById('font-btn');
+var btn4=document.getElementById('empty-btn');
+
+function clickBtn1(){
+    var str=document.getElementById('stack-input').value;
+    stack.unshift(str);
+    p.innerHTML=stack.join('-&gt');
+}
+btn1.addEventListener('click',clickBtn1);
+
+function clickBtn2(){
+    p.innerText=stack.shift();
+    p.innerHTML=stack.join('-&gt');
+}
+btn2.addEventListener('click',clickBtn2);
+
+function clickBtn3(){
+     p.innerText=stack[stack.length-1];
+}
+btn3.addEventListener('click',clickBtn3);
+
+function clickBtn4(){
+     if(stack.length==0){
+         p.innerText='栈内容为空';
+     }else{
+        p.innerText='栈内容不为空';
+     }
+}
+btn4.addEventListener('click',clickBtn4);
+</script>
+</body>
+</html>
