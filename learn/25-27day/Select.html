@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="selects">
+    <select id="year-select">
+    </select>
+    
+    <select id="month-select">
+    </select>
+    
+    <select id="day-select">
+        <option value="1">1</option>
+
+    </select>
+    
+    <select id="hour-select">
+    </select>
+    
+    <select id="minite-select">
+      
+    </select>
+    
+    <select id="second-select">
+      
+    </select>
+</div>
+    <p id="result-wrapper">现在距离 2001年1月1日星期X HH:MM:SS 还有 X 天 X 小时 X 分 X 秒</p>
+    <script type="text/javascript" src="s.js"></script>
+    <script>
+        var year=document.getElementById('year-select');
+        for(var i=1;i<33;i++){
+            var n=2000+i;
+            year.innerHTML=year.innerHTML+'<option value="'+n+'">'+n+'</option>';
+        }
+        
+        var month=document.getElementById('month-select');
+        for(var i=1;i<13;i++){
+            month.innerHTML=month.innerHTML+'<option value="'+i+'">'+i+'</option>';
+        }
+        var time=[];
+        var hour=document.getElementById('hour-select');
+        for(var i=0;i<24;i++){
+            hour.innerHTML=hour.innerHTML+'<option value="'+i+'">'+i+'</option>';
+        }
+        var min=document.getElementById('minite-select');
+        var sec=document.getElementById('second-select');
+        time.push(min);
+        time.push(sec);
+        for(var i=0;i<time.length;i++){
+            for(var j=0;j<60;j++){
+                time[i].innerHTML=time[i].innerHTML+'<option value="'+j+'">'+j+'</option>';
+            }
+        }
+
+function setDaySelect(){
+    var y=document.getElementById('year-select');
+    var m=document.getElementById('month-select');
+    var d=document.getElementById('day-select');
+    var leapYear=false;
+    d.innerHTML='';
+
+    if(y.value%4==0&&y.value%100!=0){
+        leapYear=true;
+    }
+    if(m.value>7){
+        if(m.value%2==0){
+            for(var i=1;i<32;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+        }else{
+            for(var i=1;i<31;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+        }
+    }else{
+        if(m.value%2!=0){
+            for(var i=1;i<32;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+        }else{
+            
+            if(m.value!=2){
+                for(var i=1;i<31;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+            }
+            if(m.value==2&&leapYear){
+                for(var i=1;i<30;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+            }
+            if(m.value==2&&leapYear==false){
+                for(var i=1;i<29;i++){
+                d.innerHTML=d.innerHTML+'<option value="'+i+'">'+i+'</option>';
+            }
+            }
+        }
+    }
+}
+
+
+var day=document.getElementById('day-select');
+day.addEventListener('focus',setDaySelect);
+    
+function getTime(){
+    var y=document.getElementById('year-select').value;
+    var m=document.getElementById('month-select').value;
+    var d=document.getElementById('day-select').value;
+    var h=document.getElementById('hour-select').value;
+    var mi=document.getElementById('minite-select').value;
+    var s=document.getElementById('second-select').value;
+    var p=document.getElementById('result-wrapper');
+    
+    var sec=1000;
+    var min=sec*60;
+    var hours=min*60;
+    var days=hours*24;
+
+
+    var t2=new Date(y,m,d,h,mi,s);
+    var t1=new Date();
+    var result=t1.getTime()-t2.getTime();
+    var str='现在距离'+format(t2);
+
+    if(result>0){
+        str=str+'已经过去';
+    }else{
+        str=str+'还有';
+    }
+    var num=Math.abs(result);
+    if(num%days!=0){
+        str=str+parseInt(num/days)+'天';
+        num=num%days;
+        if(num%hours!=0){
+            str=str+parseInt(num/hours)+'小时';
+            num=num%hours;
+            if(num%min!=0){
+                str=str+parseInt(num/min)+'分';
+                num=num%min;
+                str=str+parseInt(num/sec)+'秒';
+            }else{
+                str=str+parseInt(num/min)+'分'+'0秒';
+            }
+        }else{
+            str=str+parseInt(num/hours);
+        }
+    }else{
+        str=str+parseInt(num/days)+'天';
+    }
+    //console.log(str);
+    p.innerText=str;
+}
+
+function count(e){
+    var e=e||window.event;
+    if(e.target.tagName=='SELECT'){
+       getTime();
+    }
+}
+
+
+var selects=document.getElementById('selects');
+selects.addEventListener('change',count);
+
+
+
+    </script>
+</body>
+</html>

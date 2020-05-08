@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p id="time"></p>
+    <p id="time1"></p>
+    <script>
+    function day1(d){
+        var str;
+        switch(d.getDay()){
+            case 0:str='日';break;
+            case 1:str='一';break;
+            case 2:str='二';break;
+            case 3:str='三';break;
+            case 4:str='四';break;
+            case 5:str='五';break;
+            case 6:str='六';break;
+        }
+        str='星期'+str;
+        return str; 
+    }
+    function day2(d){
+        var str;
+        switch(d.getDay()){
+            case 0:str='Sunday';break;
+            case 1:str='Monday';break;
+            case 2:str='Tuesday';break;
+            case 3:str='Wednesday';break;
+            case 4:str='Thursday';break;
+            case 5:str='Friday';break;
+            case 6:str='Saturday';break;
+        }
+        return str; 
+    }
+
+    function addZero(n){
+        n=String(n);
+        if(n.length==1){
+            n='0'+n;
+        }
+        return n;
+    }
+    
+    function getYearMothsDay(d){
+        var arr=[];
+        var year=d.getFullYear();
+        var moths=addZero(d.getMonth()+1);
+        var day=addZero(d.getDate());
+        arr.push(year);
+        arr.push(moths);
+        arr.push(day);
+        return arr;
+    }
+
+    function getHoursMinSec(d){
+        var h=addZero(d.getHours());
+        var m=addZero(d.getMinutes());
+        var s=addZero(d.getSeconds());
+        return [h,m,s];
+    }
+
+    function format(d){
+        var str=[];
+        var part1=getYearMothsDay(d);
+        var part2=day1(d);
+        var part3=getHoursMinSec(d);
+        part3=part3.join(':');
+        str.push(part1[0]);
+        str.push('年');
+        str.push(part1[1]);
+        str.push('月');
+        str.push(part1[2]);
+        str.push('日');
+        str.push(part2);
+        str.push(part3);
+        str=str.join(' ');
+        return str;
+    }
+
+    function format1(d){
+        var str=[];
+        var part1=getYearMothsDay(d).join('-');
+        var part2=day2(d);
+        var part3=getHoursMinSec(d).join(':');
+        var part4=getHoursMinSec(d)[0];
+        if(part4>=0&&part4<12){
+            part4='AM';
+        }else{
+            part4='PM';
+        }
+        str.push(part1);
+        str.push(part2);
+        str.push(part3);
+        str.push(part4);
+        str=str.join(' ');
+        return str;
+
+    }
+
+    function showTime(d){
+        var p=document.getElementById('time');
+        p.innerText=format(d);
+    }
+
+    function showTime1(d){
+        var p=document.getElementById('time1');
+        p.innerText=format1(d);
+    }
+
+
+
+
+    setInterval(function(){
+        var d=new Date();
+        showTime(d);
+        showTime1(d);
+    },1000);
+    </script>
+</body>
+</html>
