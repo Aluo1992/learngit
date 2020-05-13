@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    #email-sug-wrapper{
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #email-sug-wrapper li:hover{
+        background-color:olivedrab;
+    }
+
+    .selected{
+        background-color: orange;
+    }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <input id="email-input" type="text" autofocus="autofocus">
+        <ul id="email-sug-wrapper" class="email-sug">
+        </ul>
+    </div>
+</body>
+<script>
+    var postfixList = ['163.com', 'gmail.com', '126.com', 'qq.com', '263.net'];
+
+    var email=document.getElementById('email-input');
+    var ul=document.getElementById('email-sug-wrapper');
+
+    function trim(str){
+        var s=str;
+        s=s.replace(/\s/g,'');
+        return s;
+    }
+
+    function show(){
+        var ul=document.getElementById('email-sug-wrapper');
+        ul.style.display='block';
+    }
+
+    function hide(){
+        var ul=document.getElementById('email-sug-wrapper');
+        ul.style.display='none';
+    }
+
+    function piece(str){
+        var c=[];
+        var s='';
+        if(str.length==1){
+            for(var i=0;i<postfixList.length;i++){
+            c.push('<li>'+str+'@'+postfixList[i]+'</li>');
+            }
+            s=c.join('');
+        }
+
+        if(str.length==2){
+            var n=0;
+            var newPostfixList=[];
+            n=str[1].length;
+            for(var i=0;i<postfixList.length;i++){
+                if(str[1]==postfixList[i].slice(0,n)){
+                    newPostfixList.push(postfixList[i]);
+                }
+            }
+            if(newPostfixList.length>0){
+                for(var i=0;i<newPostfixList.length;i++){
+                c.push('<li>'+str[0]+'@'+newPostfixList[i]+'</li>');
+                }
+                s=c.join('');
+            }else{
+                for(var i=0;i<postfixList.length;i++){
+                c.push('<li>'+str[0]+'@'+postfixList[i]+'</li>');
+                 }
+                s=c.join('');
+            }
+        }
+
+        return s;
+    }
+
+    function filter(str){
+        var arr=[];
+        var s='';
+        s=transcoding(str);
+        s=s.split('@');
+        if(s.length>1){
+            arr.push(s[0]);
+            arr.push(s[1]);
+            return arr;
+        }
+        return s;
+    }
+
+    function transcoding(str){
+        var s=str;
+        s=s.replace(/</g,"&lt;");
+        s=s.replace(/>/g,"&gt;");
+        s=s.replace(/\(/g,"&lpar;");
+        s=s.replace(/\)/g,"&rpar;");
+        s=s.replace(/:/g,"&colon;");
+        s=s.replace(/\+/g,"&plus;");
+        s=s.replace(/-/g,"&hyphen;");
+        s=s.replace(/\*/g,"&ast;");
+        s=s.replace(/%/g,"&percnt;");
+        return s;
+    }
+
+    function tooltip(){
+        var str=document.getElementById('email-input').value;
+        if(str.length==0){
+            hide();
+        }else{
+        str=piece(filter(trim(str)));
+        ul.innerHTML=str;
+        var liNode=ul.getElementsByTagName('li')[0];
+        liNode.setAttribute('class','selected');
+        show();
+        }
+    }
+
+    ul.addEventListener('click',function(e){
+        var e=e||window.event;
+        if(e.target.tagName=='LI'){
+            email.value=e.target.innerText;
+            hide();
+            email.focus();
+        }
+});
+
+function t(e){
+    var e=e||window.event;
+    var liNodes=ul.getElementsByTagName('li');
+    if(e.keyCode==38){
+        for(var i=0;i<liNodes.length;i++){
+            if(liNodes[i].className=='selected'){
+              if(i-1<0){return;}
+               liNodes[i].removeAttribute('class','selected');
+               if(i-1>=0){
+                liNodes[i-1].setAttribute('class','selected');
+               }
+            }
+        }
+    }
+    if(e.keyCode==40){
+        for(var i=0;i<liNodes.length;i++){
+            if(liNodes[i].className=='selected'){
+                if(i==liNodes.length-1){
+                    return;
+                }
+                liNodes[i].removeAttribute('class','selected');
+                if(i+1<liNodes.length){
+                liNodes[i+1].setAttribute('class','selected');
+                return;
+               }
+            }
+        }
+    }
+    if(e.keyCode==13){
+        for(var i=0;i<liNodes.length;i++){
+            if(liNodes[i].className=='selected'){
+                email.value=liNodes[i].innerText;
+                hide();
+                return;
+            }
+        }
+    }
+    if(e.keyCode==27){
+        email.select();
+    }
+}
+    email.addEventListener('input',tooltip);
+    email.addEventListener('keyup',t);
+
+  
+</script>
+</html>
