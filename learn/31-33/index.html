@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .checkbox{
+        float: left;
+        margin: 20px;
+    }
+    </style>
+</head>
+<body>
+
+    <div id="region-radio-wrapper" class="checkbox">
+    </div>
+    <div id="product-radio-wrapper" class="checkbox"></div>
+    <hr>
+    <div id="table-wrapper">
+        <table id="table" border="1"></table>
+    </div>
+</body>
+<script type="text/javascript" src="js/ife31data.js"></script>
+<script type="text/javascript" src="js/checkbox.js"></script>
+<script type="text/javascript" src="js/data_handler.js"></script>
+<script type="text/javascript" src="js/table.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+<script>
+    window.onload=function(){
+    let region=['华东','华南','华北','全选'];
+    let product=['手机','笔记本','智能音箱','全选'];
+    let regionWrapper=document.getElementById('region-radio-wrapper');
+    let productWrapper=document.getElementById('product-radio-wrapper');
+
+    setCheckboxes('region-radio-wrapper',region);
+    setCheckboxes('product-radio-wrapper',product);
+    
+    regionWrapper.addEventListener('click',select);
+    productWrapper.addEventListener('click',select);
+
+    init('region-radio-wrapper','product-radio-wrapper');
+
+}
+    
+</script>
+</html>
