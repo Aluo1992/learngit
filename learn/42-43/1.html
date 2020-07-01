@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+//ES5
+/*
+function extend(child,father){
+    function F(){};
+    F.prototype=father.prototype;
+    let prototype=new F;
+    prototype.constructor=child;
+    child.prototype=prototype;
+}
+
+
+function Restaurant(data){
+    this.cash=data.cash;
+    this.seats=data.seats;
+    this.staff=data.staff;
+};
+
+Restaurant.prototype.hire=function(person){
+    this.staff.push(person);
+};
+
+Restaurant.prototype.fire=function(person){
+    for(let i=0;i<this.staff.length;i++){
+        if(this.staff[i].id==person.id){
+            this.staff.splice(i,1);
+        }
+    }
+    
+};
+
+function Staff(name,salary){
+    let time=new Date();
+    this.id=time.getTime();
+    this.name=name;
+    this.salary=salary;
+};
+Staff.prototype.work=function(){
+    console.log('完成一次工作');
+};
+
+function Waiter(name,salary){
+    Staff.call(this,name,salary);
+    this.job='waiter';
+};
+
+function Cook(name,salary){
+    Staff.call(this,name,salary);
+    this.job='cook';
+};
+
+function guest(menu){
+    this.menu=menu;
+    this.count=false;
+};
+guest.prototype={'eat':function (){
+    console.log('吃菜');
+},
+'order':function (){
+    console.log('点菜');
+}};
+
+
+function dishes(name,cost,price){
+    this.name=name;
+    this.cost=cost;
+    this.price=price;
+};
+
+extend(Cook,Staff);
+
+extend(Waiter,Staff);*/
+
+//--------ES6
+
+class Restaurant{
+    constructor(data){
+        this.cash=data.cash;
+        this.seats=data.seats;
+        this.staff=data.staff;
+    }
+    hire(person){
+    this.staff.push(person);}
+    fire(person){
+        for(let i=0;i<this.staff.length;i++){
+        if(this.staff[i].id==person.id){
+            this.staff.splice(i,1);
+        }
+        }
+    }
+}
+
+class Staff{
+    constructor(name,salary){
+        let time=new Date();
+        this.id=time.getTime();
+        this.name=name;
+        this.salary=salary;
+    }
+    work(){
+    console.log('完成一次工作');};
+}
+
+class Cook extends Staff{
+    constructor(name,salary){
+        super(name,salary);
+        this.job='cook';
+    }
+}
+
+class Waiter extends Staff{
+    constructor(name,salary){
+        super(name,salary);
+        this.job='waiter';
+    }
+}
+
+class Guest{
+    constructor(menu){
+        this.menu=menu;
+        this.count=false;
+    }
+    eat(){
+    console.log('吃菜');
+}
+    order(){
+    console.log('点菜');
+}
+}
+
+class Dishes{
+    constructor(name,cost,price){
+        this.name=name;
+        this.cost=cost;
+        this.price=price;
+    }
+}
+
+//测试用例
+
+let ifeRestaurant = new Restaurant({
+    cash: 1000000,
+    seats: 20,
+    staff:[]
+});
+var newCook = new Cook("Tony", 10000);
+ifeRestaurant.hire(newCook);
+
+console.log(ifeRestaurant.staff);
+
+ifeRestaurant.fire(newCook);
+console.log(ifeRestaurant.staff);
+
+</script>
+</html>
